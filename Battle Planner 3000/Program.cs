@@ -11,8 +11,8 @@ namespace Battle_Planner_3000
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Create a military resource\n");
-            string input = Console.ReadLine();
+            var resource = CreateNewRusource();
+         
 
 
         }
@@ -20,12 +20,13 @@ namespace Battle_Planner_3000
         public static Resource CreateNewRusource()
         {
             Console.WriteLine("Create a military resource\n");
-            Console.WriteLine("Name of resource>");
-            string name = Console.ReadLine();
-            string requirements="";
+            string requirements = "";
+            string name = "";
             bool end = false;
             do
             {
+                Console.WriteLine("Name of resource>");
+                name = Console.ReadLine();
                 Console.WriteLine($"{name} requires>");
                 string what = Console.ReadLine();
                 Console.WriteLine($"how much of {what}>");
@@ -41,6 +42,7 @@ namespace Battle_Planner_3000
                 requirements += $"{howMuch} {unit} {what},";
 
             } while (!end);
+
             return new Resource(name, requirements);
         }
     }

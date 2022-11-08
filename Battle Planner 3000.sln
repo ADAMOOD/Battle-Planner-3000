@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Battle Planner 3000", "Battle Planner 3000\Battle Planner 3000.csproj", "{46FEB705-F5DD-40AC-A793-4A167BF16BEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "resourceEditor", "resourceEditor\resourceEditor.csproj", "{BC6E6D30-7E51-4E32-A13D-6B2FEB652CEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resource", "Resource\Resource.csproj", "{5AD2FDB5-7F15-438F-8B2A-1BDDEF08DA0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{46FEB705-F5DD-40AC-A793-4A167BF16BEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46FEB705-F5DD-40AC-A793-4A167BF16BEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46FEB705-F5DD-40AC-A793-4A167BF16BEE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BC6E6D30-7E51-4E32-A13D-6B2FEB652CEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC6E6D30-7E51-4E32-A13D-6B2FEB652CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BC6E6D30-7E51-4E32-A13D-6B2FEB652CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BC6E6D30-7E51-4E32-A13D-6B2FEB652CEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AD2FDB5-7F15-438F-8B2A-1BDDEF08DA0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AD2FDB5-7F15-438F-8B2A-1BDDEF08DA0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AD2FDB5-7F15-438F-8B2A-1BDDEF08DA0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AD2FDB5-7F15-438F-8B2A-1BDDEF08DA0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

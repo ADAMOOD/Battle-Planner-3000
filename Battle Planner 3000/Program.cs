@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Versioning;
+using BetterConsoleTables;
+using resourceEditor;
 
 namespace Battle_Planner_3000
 {
@@ -11,22 +14,45 @@ namespace Battle_Planner_3000
 
         static void Main(string[] args)
         {
-            var resource = CreateNewRusource();
-         
+            Console.WriteLine("l-list resources\nc-create new resource");
+            while (true)
+            {
+                var option = Console.ReadLine();
+                switch (option)
+                {
+                    case "l":
+                        {
+                            var table = new Table("name", "ID", "requirements");
+                            table.Config = TableConfiguration.UnicodeAlt();
+                            foreach (var resource in Resources)
+                            {
+                                string requirements = string.Join("; ", resource.Requirements); 
+                                table.AddRow(resource.Name, resource.IDR,requirements);
+                            }
+                            Console.WriteLine(table.ToString());
+                            break;
+                        }
+                    case "c":
+                        {
+                            var resource = CreateNewRusource();
+                            Resources.Add(resource);
+                            break;
+                        }
+                }
 
 
+            }
         }
 
         public static Resource CreateNewRusource()
         {
             Console.WriteLine("Create a military resource\n");
             string requirements = "";
-            string name = "";
-            bool end = false;
+            Console.WriteLine("Name of resource>");
+            string name = Console.ReadLine();
+            string answer = "n";
             do
             {
-                Console.WriteLine("Name of resource>");
-                name = Console.ReadLine();
                 Console.WriteLine($"{name} requires>");
                 string what = Console.ReadLine();
                 Console.WriteLine($"how much of {what}>");
@@ -34,15 +60,9 @@ namespace Battle_Planner_3000
                 Console.Write("In What unit>");
                 string unit = Console.ReadLine();
                 Console.Write("IS IT ALL? (y/n)");
-                string answer = Console.ReadLine();
-                if (answer.Equals("y"))
-                {
-                    end = true;
-                }
+                answer = Console.ReadLine();
                 requirements += $"{howMuch} {unit} {what},";
-
-            } while (!end);
-
+            } while (answer.Equals("n"));
             return new Resource(name, requirements);
         }
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Battle_Planner_3000
+namespace resourceEditor
 {
     public class Resource
     {
@@ -10,26 +10,26 @@ namespace Battle_Planner_3000
         public string Name { get; set; }
         public string IDR;
 
-        public Resource(string name,string input)
+        public Resource(string name, string input)
         {
             Requirements = input.Split(',').ToList();
             Name = name;
             IDR = RandomIdr();
-
         }
 
         private static string RandomIdr()
         {
             var random = new Random();
-            string idr="";
+            string idr = "";
             for (int i = 0; i < 4; i++)
             {
-                idr+= random.Next(0, 9).ToString();
+                idr += random.Next(0, 9).ToString();
             }
 
             return idr;
         }
+       
 
     }
-    
+
 }

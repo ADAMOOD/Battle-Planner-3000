@@ -10,9 +10,9 @@ namespace resourceEditor
         public string Name { get; set; }
         public string IDR;
 
-        public Resource(string name, string input)
+        public Resource(string name,List<string> requirements)
         {
-            Requirements = input.Split(',').ToList();
+            Requirements = requirements;
             Name = name;
             IDR = RandomIdr();
         }
@@ -25,7 +25,6 @@ namespace resourceEditor
             {
                 idr += random.Next(0, 9).ToString();
             }
-
             return idr;
         }
        

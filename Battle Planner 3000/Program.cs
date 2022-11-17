@@ -79,7 +79,7 @@ namespace Battle_Planner_3000
         public static Resource CreateNewRusource()
         {
             Console.WriteLine("Create a military resource\n");
-            string requirements = "";
+            List<string> resourceRequirements = new List<string>();
             Console.WriteLine("Name of resource>");
             string name = Console.ReadLine();
             string answer = "n";
@@ -93,9 +93,10 @@ namespace Battle_Planner_3000
                 string unit = Console.ReadLine();
                 Console.Write("IS IT ALL? (y/n)");
                 answer = Console.ReadLine();
-                requirements += $"{howMuch} {unit} {what},";
+                resourceRequirements.Add($"{howMuch} {unit} {what}");
+                
             } while (answer.Equals("n"));
-            return new Resource(name, requirements);
+            return new Resource(name, resourceRequirements);
         }
     }
 

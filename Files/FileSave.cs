@@ -5,6 +5,7 @@ using System.Runtime.Versioning;
 using System.Text;
 using System.Text.Json;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using resourceEditor;
 
 namespace FileSave

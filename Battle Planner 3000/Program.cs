@@ -16,10 +16,11 @@ namespace Battle_Planner_3000
 
         static void Main(string[] args)
         {
-
+            var file = new FileSave.FileSave("saveTest");
+            file.loadSavedFile();
             while (true)
             {
-                
+
                 Console.WriteLine("l-list resources\nc-create new resource\ne-edit list");
                 var option = Console.ReadLine();
                 switch (option)
@@ -30,8 +31,8 @@ namespace Battle_Planner_3000
                             table.Config = TableConfiguration.UnicodeAlt();
                             foreach (var resource in Resources)
                             {
-                                string requirements = string.Join("; ", resource.Requirements); 
-                                table.AddRow(resource.Name, resource.IDR,requirements);
+                                string requirements = string.Join("; ", resource.Requirements);
+                                table.AddRow(resource.Name, resource.IDR, requirements);
                             }
                             Console.WriteLine(table.ToString());
                             break;
@@ -43,25 +44,22 @@ namespace Battle_Planner_3000
                             break;
                         }
                     case "e":
-                    {
-                        Console.WriteLine("Give id me name of Resource");
-                        var resouce = FindResource(Console.ReadLine());
-                        if (resouce.Equals(null))
                         {
-                            throw new InvalidOperationException("Resource not founded");
+                            Console.WriteLine("Give id me name of Resource");
+                            var resouce = FindResource(Console.ReadLine());
+                            if (resouce.Equals(null))
+                            {
+                                throw new InvalidOperationException("Resource not founded");
+                            }
+                            break;
                         }
-                        break;
-                    }
                 }
-                saveData();
-
-            
+                saveDataToFile(file);
             }
         }
 
-        public static void saveData()
+        public static void saveDataToFile(FileSave.FileSave file)
         {
-            var file = new FileSave.FileSave("saveTest");
             foreach (var resource in Resources)
             {
                 file.saveFile(resource);

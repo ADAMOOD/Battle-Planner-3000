@@ -28,6 +28,19 @@ namespace FileSave
                 fs.Write(info, 0, info.Length);
             }
         }
+
+        public void loadSavedFile()
+        {
+            
+            if (File.Exists(this.Path))
+            {
+                using (StreamReader saveFile = new StreamReader(this.Path))
+                {
+                    string json = saveFile.ReadToEnd();
+                    var save= JsonConvert.DeserializeObject<Resource>(json);
+                }
+            }
+        }
        
 
     }

@@ -10,39 +10,36 @@ using resourceEditor;
 
 namespace FileSave
 {
-    public class FileSave
+    public class FilesJson
     {
-        public string Name {get; set;}
-        public string Path {get; set;}
+        public string Name { get; set; }
+        public string Path { get; set; }
 
-        public FileSave(string name)
+        public FilesJson(string name)
         {
-            Name=name;
-            Path= $"{AppDomain.CurrentDomain.BaseDirectory}\\{name}.json";
+            Name = name;
+            Path = $"{AppDomain.CurrentDomain.BaseDirectory}\\{name}.json";
         }
 
-        public void saveFile(Resource resource)
+        public void saveToFile(List<Resource> resources)
         {
-            using (FileStream fs = File.Create(this.Path))
-            {
-                byte[] info = new UTF8Encoding(true).GetBytes(JsonConvert.SerializeObject(resource));
-                fs.Write(info, 0, info.Length);
-            }
+            File.WriteAllText(this.Path, JsonConvert.SerializeObject(resources));
         }
 
-        public void loadSavedFile()
+        public List<Resource> loadSavedFile()
         {
-            
+
             if (File.Exists(this.Path))
             {
                 using (StreamReader saveFile = new StreamReader(this.Path))
                 {
                     string json = saveFile.ReadToEnd();
-                    var save= JsonConvert.DeserializeObject<Resource>(json);
+                    var save = JsonConvert.DeserializeObject<List<Resource>>(json); 
+                    return save;
                 }
+                
             }
+            return null;
         }
-       
-
     }
 }

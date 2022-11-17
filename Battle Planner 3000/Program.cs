@@ -7,6 +7,7 @@ using System.Text;
 using BetterConsoleTables;
 using Microsoft.Win32.SafeHandles;
 using resourceEditor;
+using FileSave;
 
 namespace Battle_Planner_3000
 {
@@ -16,11 +17,10 @@ namespace Battle_Planner_3000
 
         static void Main(string[] args)
         {
-            var file = new FileSave.FileSave("saveTest");
-            file.loadSavedFile();
+            var file = new FilesJson("saveTest");
+            Resources = file.loadSavedFile();
             while (true)
             {
-
                 Console.WriteLine("l-list resources\nc-create new resource\ne-edit list");
                 var option = Console.ReadLine();
                 switch (option)
@@ -54,17 +54,11 @@ namespace Battle_Planner_3000
                             break;
                         }
                 }
-                saveDataToFile(file);
+                file.saveToFile(Resources);
             }
         }
 
-        public static void saveDataToFile(FileSave.FileSave file)
-        {
-            foreach (var resource in Resources)
-            {
-                file.saveFile(resource);
-            }
-        }
+
         public static Resource FindResource(string id)
         {
             foreach (var resource in Resources)
@@ -94,7 +88,7 @@ namespace Battle_Planner_3000
                 Console.Write("IS IT ALL? (y/n)");
                 answer = Console.ReadLine();
                 resourceRequirements.Add($"{howMuch} {unit} {what}");
-                
+
             } while (answer.Equals("n"));
             return new Resource(name, resourceRequirements);
         }

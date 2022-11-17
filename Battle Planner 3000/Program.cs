@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Versioning;
+using System.Text;
 using BetterConsoleTables;
+using Microsoft.Win32.SafeHandles;
 using resourceEditor;
 
 namespace Battle_Planner_3000
@@ -14,9 +16,11 @@ namespace Battle_Planner_3000
 
         static void Main(string[] args)
         {
-            Console.WriteLine("l-list resources\nc-create new resource");
+
             while (true)
             {
+                
+                Console.WriteLine("l-list resources\nc-create new resource\ne-edit list");
                 var option = Console.ReadLine();
                 switch (option)
                 {
@@ -38,12 +42,42 @@ namespace Battle_Planner_3000
                             Resources.Add(resource);
                             break;
                         }
+                    case "e":
+                    {
+                        Console.WriteLine("Give id me name of Resource");
+                        var resouce = FindResource(Console.ReadLine());
+                        if (resouce.Equals(null))
+                        {
+                            throw new InvalidOperationException("Resource not founded");
+                        }
+                        break;
+                    }
                 }
+                saveData();
 
-
+            
             }
         }
 
+        public static void saveData()
+        {
+            var file = new FileSave.FileSave("saveTest");
+            foreach (var resource in Resources)
+            {
+                file.saveFile(resource);
+            }
+        }
+        public static Resource FindResource(string id)
+        {
+            foreach (var resource in Resources)
+            {
+                if (resource.IDR.Equals(id))
+                {
+                    return resource;
+                }
+            }
+            return null;
+        }
         public static Resource CreateNewRusource()
         {
             Console.WriteLine("Create a military resource\n");
@@ -66,5 +100,6 @@ namespace Battle_Planner_3000
             return new Resource(name, requirements);
         }
     }
+
 }
 

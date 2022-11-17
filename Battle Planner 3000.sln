@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Battle Planner 3000", "Batt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resource", "Resource\Resource.csproj", "{5AD2FDB5-7F15-438F-8B2A-1BDDEF08DA0B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "File", "Files\File.csproj", "{63050578-5DDE-4A35-AC4B-F53FA491EEC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5AD2FDB5-7F15-438F-8B2A-1BDDEF08DA0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AD2FDB5-7F15-438F-8B2A-1BDDEF08DA0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AD2FDB5-7F15-438F-8B2A-1BDDEF08DA0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63050578-5DDE-4A35-AC4B-F53FA491EEC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63050578-5DDE-4A35-AC4B-F53FA491EEC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63050578-5DDE-4A35-AC4B-F53FA491EEC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63050578-5DDE-4A35-AC4B-F53FA491EEC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

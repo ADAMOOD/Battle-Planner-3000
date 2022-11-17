@@ -8,11 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="BetterConsoleTables" Version="1.1.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-
-    <ProjectReference Include="..\Resource\Resource.csproj" />
-  </ItemGroup>
+	 <ItemGroup>
+		 <ProjectReference Include="..\Resource\Resource.csproj" />
+		 <ProjectReference Include="..\Files\File.csproj" /> 
+	</ItemGroup>
 
 </Project>

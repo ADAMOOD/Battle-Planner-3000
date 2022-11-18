@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Runtime.Versioning;
@@ -47,9 +48,19 @@ namespace Battle_Planner_3000
                         {
                             Console.WriteLine("Give id me name of Resource");
                             var resouce = FindResource(Console.ReadLine());
-                            if (resouce.Equals(null))
+                            Console.WriteLine($"What do you wanna do with {resouce.Name}?\nd-delete it\nu-update its requirements");
+                            switch (Console.ReadLine())
                             {
-                                throw new InvalidOperationException("Resource not founded");
+                                case "u":
+                                    {
+
+                                        break;
+                                    }
+                                case "d":
+                                    {
+                                        Resources.RemoveAll( p => p.IDR == resouce.IDR);
+                                        break;
+                                    }
                             }
                             break;
                         }
@@ -68,7 +79,7 @@ namespace Battle_Planner_3000
                     return resource;
                 }
             }
-            return null;
+            throw new InvalidOperationException("Resource not founded");
         }
         public static Resource CreateNewRusource()
         {
@@ -88,7 +99,6 @@ namespace Battle_Planner_3000
                 Console.Write("IS IT ALL? (y/n)");
                 answer = Console.ReadLine();
                 resourceRequirements.Add($"{howMuch} {unit} {what}");
-
             } while (answer.Equals("n"));
             return new Resource(name, resourceRequirements);
         }

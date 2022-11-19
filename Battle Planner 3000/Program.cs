@@ -53,12 +53,12 @@ namespace Battle_Planner_3000
                             {
                                 case "u":
                                     {
-
+                                        resouce.Requirements.AddRange(GettingRequirements(resouce.Name));
                                         break;
                                     }
                                 case "d":
                                     {
-                                        Resources.RemoveAll( p => p.IDR == resouce.IDR);
+                                        Resources.RemoveAll(p => p.IDR == resouce.IDR);
                                         break;
                                     }
                             }
@@ -84,10 +84,17 @@ namespace Battle_Planner_3000
         public static Resource CreateNewRusource()
         {
             Console.WriteLine("Create a military resource\n");
-            List<string> resourceRequirements = new List<string>();
+
             Console.WriteLine("Name of resource>");
             string name = Console.ReadLine();
             string answer = "n";
+            return new Resource(name, GettingRequirements(name));
+        }
+
+        private static List<string> GettingRequirements(string name)
+        {
+            List<string> resources = new List<string>();
+            string answer;
             do
             {
                 Console.WriteLine($"{name} requires>");
@@ -98,9 +105,9 @@ namespace Battle_Planner_3000
                 string unit = Console.ReadLine();
                 Console.Write("IS IT ALL? (y/n)");
                 answer = Console.ReadLine();
-                resourceRequirements.Add($"{howMuch} {unit} {what}");
+                resources.Add($"{howMuch} {unit} {what}");
             } while (answer.Equals("n"));
-            return new Resource(name, resourceRequirements);
+            return resources;
         }
     }
 

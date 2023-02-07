@@ -17,7 +17,12 @@ namespace resourceEditor
         {
             Requirements = requirements;
             Name = name;
-            IDR = Helpers.randomInt();
+            IDR = Helpers.randomInt(4);
+        }
+
+        public void addRequirements(List<string> resources)
+        {
+            this.Requirements.AddRange(resources);
         }
     }
 }

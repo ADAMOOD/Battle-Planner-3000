@@ -54,7 +54,7 @@ namespace Battle_Planner_3000
                             {
                                 case "u":
                                     {
-                                        resouce.Requirements.AddRange(GettingRequirements(resouce.Name));
+                                        resouce.addRequirements(GettingRequirements(resouce.Name));
                                         break;
                                     }
                                 case "d":

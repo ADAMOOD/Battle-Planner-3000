@@ -10,6 +10,7 @@ using Microsoft.Win32.SafeHandles;
 using resourceEditor;
 using FileSave;
 using Newtonsoft.Json.Converters;
+using UnitEditor;
 
 namespace Battle_Planner_3000
 {
@@ -23,22 +24,14 @@ namespace Battle_Planner_3000
             Resources = file.loadSavedFile();
             while (true)
             {
-                Console.WriteLine("l-list resources\nc-create new resource\ne-edit list of resources\nu-create unit");
-                var option = Console.ReadLine();
+                var option = Input("l-list resources\nc-create new resource\ne-edit list of resources\nu-create unit");
                 switch (option)
                 {
                     case "l":
-                        {
-                            var table = new Table("name", "ID", "requirements");
-                            table.Config = TableConfiguration.UnicodeAlt();
-                            foreach (var resource in Resources)
-                            {
-                                string requirements = string.Join("; ", resource.Requirements);
-                                table.AddRow(resource.Name, resource.IDR, requirements);
-                            }
-                            Console.WriteLine(table.ToString());
-                            break;
-                        }
+                    {
+                        PrintTable(Resources, "name", "ID", "requirements");
+                        break;
+                    }
                     case "c":
                         {
                             var resource = CreateNewRusource();
@@ -47,8 +40,7 @@ namespace Battle_Planner_3000
                         }
                     case "e":
                         {
-                            Console.WriteLine("Give id me name of Resource");
-                            var resouce = FindResource(Console.ReadLine());
+                            var resouce = FindResource(Input("Give id me name of Resource"));
                             Console.WriteLine($"What do you wanna do with {resouce.Name}?\nd-delete it\nu-update its requirements");
                             switch (Console.ReadLine())
                             {
@@ -74,6 +66,24 @@ namespace Battle_Planner_3000
                 file.saveToFile(Resources);
             }
         }
+
+        private static void PrintTable(List<Resource> listOfValues, string head1,string head2, string head3)
+        {
+            var table = new Table(head1, head2, head3);
+            table.Config = TableConfiguration.UnicodeAlt();
+            foreach (var resource in listOfValues)
+            {
+                string requirements = string.Join("; ", resource.Requirements);
+                table.AddRow(resource.Name, resource.IDR, requirements);
+            }
+
+            Console.WriteLine(table.ToString());
+        }
+
+       /* public static BattleUnit CreateNewBattleUnit()
+        {
+            
+        }*/
         public static Resource FindResource(string id)
         {
             foreach (var resource in Resources)
@@ -88,10 +98,8 @@ namespace Battle_Planner_3000
         public static Resource CreateNewRusource()
         {
             Console.WriteLine("Create a military resource\n");
-
             Console.WriteLine("Name of resource>");
             string name = Console.ReadLine();
-            string answer = "n";
             return new Resource(name, GettingRequirements(name));
         }
         private static List<string> GettingRequirements(string name)
@@ -100,17 +108,19 @@ namespace Battle_Planner_3000
             string answer;
             do
             {
-                Console.WriteLine($"{name} requires>");
-                string what = Console.ReadLine();
-                Console.WriteLine($"how much of {what}>");
-                string howMuch = Console.ReadLine();
-                Console.Write("In What unit>");
-                string unit = Console.ReadLine();
-                Console.Write("IS IT ALL? (y/n)");
-                answer = Console.ReadLine();
+                var what = Input($"{name} requires>");
+                string howMuch = Input($"how much of {what}>");
+                string unit = Input("In What unit>");
+                answer = Input("IS IT ALL? (y/n)");
                 resources.Add($"{howMuch} {unit} {what}");
             } while (answer.Equals("n"));
             return resources;
+        }
+
+        public static string Input(string query)
+        {
+            Console.WriteLine(query);
+            return Console.ReadLine();
         }
     }
 

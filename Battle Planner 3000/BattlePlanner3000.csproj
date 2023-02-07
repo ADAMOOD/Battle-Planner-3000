@@ -14,7 +14,7 @@
 	 <ItemGroup>
 		 <ProjectReference Include="..\Resource\Resource.csproj" />
 		 <ProjectReference Include="..\Files\File.csproj" />
-		 <ProjectReference Include="..\Unit\Unit.csproj" />
+		 <ProjectReference Include="..\Unit\BattleUnit.csproj" />
 	 </ItemGroup>
 
 </Project>

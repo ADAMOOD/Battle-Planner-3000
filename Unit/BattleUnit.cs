@@ -5,13 +5,11 @@ using resourceEditor;
 
 namespace UnitEditor
 {
-    public class Unit
+    public class BattleUnit
     {
         public List<Resource> ResourcesInUnit = new List<Resource>();
-        public string Name { get; set; }
         public string IDU;
-
-        public Unit(Resource providedResource)
+        public BattleUnit(Resource providedResource)
         {
             ResourcesInUnit.Add(providedResource);
             IDU = Helpers.randomInt(4);

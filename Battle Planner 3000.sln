@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resource", "Resource\Resour
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "File", "Files\File.csproj", "{63050578-5DDE-4A35-AC4B-F53FA491EEC1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unit", "Unit\Unit.csproj", "{E67155A5-2628-40B0-A24A-03DF3DCC9AA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BattleUnit", "Unit\BattleUnit.csproj", "{E67155A5-2628-40B0-A24A-03DF3DCC9AA7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpers", "Helpers\Helpers.csproj", "{6DF2B23B-808A-4428-9CE1-C9FF13EAB1BE}"
 EndProject

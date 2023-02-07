@@ -9,6 +9,7 @@ using BetterConsoleTables;
 using Microsoft.Win32.SafeHandles;
 using resourceEditor;
 using FileSave;
+using Newtonsoft.Json.Converters;
 
 namespace Battle_Planner_3000
 {
@@ -22,7 +23,7 @@ namespace Battle_Planner_3000
             Resources = file.loadSavedFile();
             while (true)
             {
-                Console.WriteLine("l-list resources\nc-create new resource\ne-edit list");
+                Console.WriteLine("l-list resources\nc-create new resource\ne-edit list of resources\nu-create unit");
                 var option = Console.ReadLine();
                 switch (option)
                 {
@@ -64,12 +65,15 @@ namespace Battle_Planner_3000
                             }
                             break;
                         }
+                    case "u":
+                    {
+                        
+                        break;
+                    }
                 }
                 file.saveToFile(Resources);
             }
         }
-
-
         public static Resource FindResource(string id)
         {
             foreach (var resource in Resources)
@@ -90,7 +94,6 @@ namespace Battle_Planner_3000
             string answer = "n";
             return new Resource(name, GettingRequirements(name));
         }
-
         private static List<string> GettingRequirements(string name)
         {
             List<string> resources = new List<string>();

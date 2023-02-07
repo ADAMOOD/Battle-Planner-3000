@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using Battle_Planner_3000;
 
 
 namespace resourceEditor
@@ -15,23 +17,7 @@ namespace resourceEditor
         {
             Requirements = requirements;
             Name = name;
-            IDR = RandomIdr();
+            IDR = Helpers.randomInt();
         }
-
-        private static string RandomIdr()
-        {
-            var random = new Random();
-            string idr = "";
-            for (int i = 0; i < 4; i++)
-            {
-                idr += random.Next(0, 9).ToString();
-            }
-            return idr;
-        }
-
-    
-       
-
     }
-
 }

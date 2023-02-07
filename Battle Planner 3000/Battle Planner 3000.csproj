@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -13,7 +13,8 @@
 
 	 <ItemGroup>
 		 <ProjectReference Include="..\Resource\Resource.csproj" />
-		 <ProjectReference Include="..\Files\File.csproj" /> 
-	</ItemGroup>
+		 <ProjectReference Include="..\Files\File.csproj" />
+		 <ProjectReference Include="..\Unit\Unit.csproj" />
+	 </ItemGroup>
 
 </Project>

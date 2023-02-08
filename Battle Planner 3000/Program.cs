@@ -16,8 +16,8 @@ namespace Battle_Planner_3000
 {
     internal class Program
     {
-        public static List<Resource> Resources = new List<Resource>();
-        public static List<BattleUnit> BattleUnits = new List<BattleUnit>();
+        public static List<Resource> Resources;
+        public static List<BattleUnit> BattleUnits;
         static void Main(string[] args)
         {
             var resourcesfile = new FilesJson("saveTest");
@@ -65,10 +65,10 @@ namespace Battle_Planner_3000
                             break;
                         }
                     case "lu":
-                    {
-                      // PrintTable(BattleUnits,"1","2","3");
-                        break;
-                    }
+                        {
+                             PrintTable2(BattleUnits,"unit type","UID","Resources");
+                            break;
+                        }
                 }
                 resourcesfile.saveToFile(Resources);
                 unitFile.saveToFile(BattleUnits);
@@ -86,14 +86,18 @@ namespace Battle_Planner_3000
             }
             Console.WriteLine(table.ToString());
         }
-        private static void PrintTable<T>(List<BattleUnit> listOfValues, string head1, string head2, string head3)
+        private static void PrintTable2(List<BattleUnit> listOfValues, string head1, string head2, string head3)
         {
             var table = new Table(head1, head2, head3);
             table.Config = TableConfiguration.UnicodeAlt();
-            foreach (var resource in listOfValues)
+            foreach (var Unit in listOfValues)
             {
-                string requirements = string.Join("; ", resource.ResourcesInUnit);
-                table.AddRow(resource.type, resource.IDU, resource.ResourcesInUnit);
+                string resources="";
+                foreach (var resource  in Unit.ResourcesInUnit)
+                {
+                    resources= string.Join("; ", resource.Name);
+                }
+                table.AddRow(Unit.type, Unit.IDU, resources);
             }
             Console.WriteLine(table.ToString());
         }

@@ -10,6 +10,7 @@ namespace UnitEditor
         public List<Resource> ResourcesInUnit = new List<Resource>();
         public string IDU;
         public string type;
+        public BattleUnit() { }
         public BattleUnit(string type)
         {
             this.type = type;
@@ -19,6 +20,12 @@ namespace UnitEditor
         {
             this.type = type;
             ResourcesInUnit.Add(providedResource);
+            IDU = Helpers.randomInt(4);
+        }
+        public BattleUnit(List<Resource> listOfResources, string type)
+        {
+            this.type = type;
+            ResourcesInUnit=listOfResources;
             IDU = Helpers.randomInt(4);
         }
         public void addResources(List<Resource> resources)

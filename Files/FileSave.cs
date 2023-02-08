@@ -28,7 +28,6 @@ namespace FileSave
 
         public List<t> loadSavedFile<t>()
         {
-
             if (File.Exists(this.Path))
             {
                 using (StreamReader saveFile = new StreamReader(this.Path))
@@ -38,7 +37,7 @@ namespace FileSave
                     return save;
                 }
             }
-            return null;
+            return new List<t>();
         }
     }
 }

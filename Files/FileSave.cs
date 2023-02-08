@@ -21,12 +21,12 @@ namespace FileSave
             Path = $"{AppDomain.CurrentDomain.BaseDirectory}\\{name}.json";
         }
 
-        public void saveToFile(List<Resource> resources)
+        public void saveToFile<t>(List<t> resources)
         {
             File.WriteAllText(this.Path, JsonConvert.SerializeObject(resources));
         }
 
-        public List<Resource> loadSavedFile()
+        public List<t> loadSavedFile<t>()
         {
 
             if (File.Exists(this.Path))
@@ -34,10 +34,9 @@ namespace FileSave
                 using (StreamReader saveFile = new StreamReader(this.Path))
                 {
                     string json = saveFile.ReadToEnd();
-                    var save = JsonConvert.DeserializeObject<List<Resource>>(json); 
+                    var save = JsonConvert.DeserializeObject<List<t>>(json); 
                     return save;
                 }
-                
             }
             return null;
         }

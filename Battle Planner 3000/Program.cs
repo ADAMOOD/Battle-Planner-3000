@@ -17,21 +17,23 @@ namespace Battle_Planner_3000
     internal class Program
     {
         public static List<Resource> Resources = new List<Resource>();
-
+        public static List<BattleUnit> BattleUnits = new List<BattleUnit>();
         static void Main(string[] args)
         {
-            var file = new FilesJson("saveTest");
-            Resources = file.loadSavedFile();
+            var resourcesfile = new FilesJson("saveTest");
+            var unitFile = new FilesJson("savedUnits");
+            Resources = resourcesfile.loadSavedFile<Resource>();
+            BattleUnits = unitFile.loadSavedFile<BattleUnit>();
             while (true)
             {
                 var option = Input("l-list resources\nc-create new resource\ne-edit list of resources\nu-create unit");
                 switch (option)
                 {
                     case "l":
-                    {
-                        PrintTable(Resources, "name", "ID", "requirements");
-                        break;
-                    }
+                        {
+                            PrintTable(Resources, "name", "ID", "requirements");
+                            break;
+                        }
                     case "c":
                         {
                             var resource = CreateNewRusource();
@@ -58,16 +60,22 @@ namespace Battle_Planner_3000
                             break;
                         }
                     case "u":
+                        {
+                            BattleUnits.Add(CreateNewBattleUnit());
+                            break;
+                        }
+                    case "lu":
                     {
-                        
+                      // PrintTable(BattleUnits,"1","2","3");
                         break;
                     }
                 }
-                file.saveToFile(Resources);
+                resourcesfile.saveToFile(Resources);
+                unitFile.saveToFile(BattleUnits);
             }
         }
 
-        private static void PrintTable(List<Resource> listOfValues, string head1,string head2, string head3)
+        private static void PrintTable(List<Resource> listOfValues, string head1, string head2, string head3)
         {
             var table = new Table(head1, head2, head3);
             table.Config = TableConfiguration.UnicodeAlt();
@@ -76,14 +84,44 @@ namespace Battle_Planner_3000
                 string requirements = string.Join("; ", resource.Requirements);
                 table.AddRow(resource.Name, resource.IDR, requirements);
             }
-
             Console.WriteLine(table.ToString());
         }
-
-       /* public static BattleUnit CreateNewBattleUnit()
+        private static void PrintTable<T>(List<BattleUnit> listOfValues, string head1, string head2, string head3)
         {
-            
-        }*/
+            var table = new Table(head1, head2, head3);
+            table.Config = TableConfiguration.UnicodeAlt();
+            foreach (var resource in listOfValues)
+            {
+                string requirements = string.Join("; ", resource.ResourcesInUnit);
+                table.AddRow(resource.type, resource.IDU, resource.ResourcesInUnit);
+            }
+            Console.WriteLine(table.ToString());
+        }
+        public static BattleUnit CreateNewBattleUnit()
+        {
+            string type = Input("Creating Battle Unit\nGive me a Unit Type");
+            string id = Input("give me resource id");
+            if (id.Length == 0)
+            {
+                return new BattleUnit(type);
+            }
+            var resource = FindResource(id);
+            return new BattleUnit(resource, type);
+        }
+        private static List<string> GettingResources(string name)
+        {
+            List<string> resources = new List<string>();
+            string answer;
+            do
+            {
+                var what = Input($"{name} requires>");
+                string howMuch = Input($"how much of {what}>");
+                string unit = Input("In What unit>");
+                answer = Input("IS IT ALL? (y/n)");
+                resources.Add($"{howMuch} {unit} {what}");
+            } while (answer.Equals("n"));
+            return resources;
+        }
         public static Resource FindResource(string id)
         {
             foreach (var resource in Resources)
@@ -97,9 +135,7 @@ namespace Battle_Planner_3000
         }
         public static Resource CreateNewRusource()
         {
-            Console.WriteLine("Create a military resource\n");
-            Console.WriteLine("Name of resource>");
-            string name = Console.ReadLine();
+            string name = Input("Create a military resource\nName of resource>");
             return new Resource(name, GettingRequirements(name));
         }
         private static List<string> GettingRequirements(string name)

@@ -96,9 +96,9 @@ namespace Battle_Planner_3000
                 string resources="";
                 foreach (var resource  in Unit.ResourcesInUnit)
                 {
-                    resources= string.Join("; ", resource.Resource.Name);
+                    resources= $"{string.Join("; ", resource.Resource.Name)} {resource.Count}";
                 }
-                table.AddRow(Unit.type, Unit.IDU, resources);
+                table.AddRow(Unit.type, Unit.IDU,resources);
             }
             Console.WriteLine(table.ToString());
         }
@@ -152,6 +152,5 @@ namespace Battle_Planner_3000
             return Console.ReadLine();
         }
     }
-
 }
 

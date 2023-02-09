@@ -20,6 +20,10 @@ namespace resourceEditor
             IDR = Helpers.randomInt(4);
         }
 
+        public Resource()
+        {
+
+        }
         public void addRequirements(List<string> resources)
         {
             this.Requirements.AddRange(resources);

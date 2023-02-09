@@ -68,7 +68,7 @@ namespace Battle_Planner_3000
                         }
                     case "lu":
                         {
-                             PrintTable2(BattleUnits,"unit type","UID","Resources");
+                            PrintTable2(BattleUnits, "unit type", "UID", "Resources");
                             break;
                         }
                 }
@@ -91,29 +91,41 @@ namespace Battle_Planner_3000
         {
             var table = new Table(head1, head2, head3);
             table.Config = TableConfiguration.UnicodeAlt();
+            List<string> resources;
             foreach (var Unit in listOfValues)
             {
-                string resources="";
-                foreach (var resource  in Unit.ResourcesInUnit)
+                resources = new List<string>();
+                string allResources = "";
+                foreach (var resource in Unit.ResourcesInUnit)
                 {
-                    resources= $"{string.Join("; ", resource.Resource.Name)} {resource.Count}";
+                    resources.Add($"{resource.Resource.Name} {resource.Count}"); 
                 }
-                table.AddRow(Unit.type, Unit.IDU,resources);
+                allResources= string.Join("; ", resources);
+                table.AddRow(Unit.type, Unit.IDU, allResources);
             }
             Console.WriteLine(table.ToString());
         }
         public static BattleUnit CreateNewBattleUnit()
         {
             string type = Input("Creating Battle Unit\nGive me a Unit Type");
-            string id = Input("give me resource id");
-            if (id.Length == 0)
+            List<ResourceCount> battleUnitsList = new List<ResourceCount>();
+            string id;
+            string answer = "";
+            var resource = new Resource();
+            int num = 0;
+            do
             {
-                return new BattleUnit(type);
-            }
-            var resource = FindResource(id);
-            int num = Int32.Parse(Input($"how much of{resource.Name}?"));
-            var resourceCount = new ResourceCount(resource, num);
-            return new BattleUnit(resourceCount, type);
+                id = Input("give me resource id");
+                /*  if (id.Length == 0)
+                  {
+                      return new BattleUnit(type);
+                  }*/
+                resource = FindResource(id);
+                num=Int32.Parse(Input($"how much of{resource.Name}?"));
+                battleUnitsList.Add(new ResourceCount(resource, num));
+                answer= Input("IS IT ALL? (y/n)");
+            } while (answer.Equals("n"));
+            return new BattleUnit(battleUnitsList, type);
         }
         public static Resource FindResource(string id)
         {

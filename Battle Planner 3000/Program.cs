@@ -12,6 +12,7 @@ using FileSave;
 using Newtonsoft.Json.Converters;
 using UnitEditor;
 
+
 namespace Battle_Planner_3000
 {
     internal class Program
@@ -74,7 +75,6 @@ namespace Battle_Planner_3000
                 unitFile.saveToFile(BattleUnits);
             }
         }
-
         private static void PrintTable(List<Resource> listOfValues, string head1, string head2, string head3)
         {
             var table = new Table(head1, head2, head3);
@@ -111,20 +111,6 @@ namespace Battle_Planner_3000
             }
             var resource = FindResource(id);
             return new BattleUnit(resource, type);
-        }
-        private static List<string> GettingResources(string name)
-        {
-            List<string> resources = new List<string>();
-            string answer;
-            do
-            {
-                var what = Input($"{name} requires>");
-                string howMuch = Input($"how much of {what}>");
-                string unit = Input("In What unit>");
-                answer = Input("IS IT ALL? (y/n)");
-                resources.Add($"{howMuch} {unit} {what}");
-            } while (answer.Equals("n"));
-            return resources;
         }
         public static Resource FindResource(string id)
         {

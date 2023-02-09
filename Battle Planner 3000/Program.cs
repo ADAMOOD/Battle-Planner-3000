@@ -80,11 +80,10 @@ namespace Battle_Planner_3000
         {
             var table = new Table(head1, head2, head3);
             table.Config = TableConfiguration.UnicodeAlt();
-            foreach (var resource in listOfValues)
-            {
-                string requirements = string.Join("; ", resource.Requirements);
-                table.AddRow(resource.Name, resource.IDR, requirements);
-            }
+            listOfValues
+                .Select(resource => new { resource.Name, resource.IDR, Requirements = string.Join("; ", resource.Requirements) })
+                .ToList()
+                .ForEach(r => table.AddRow(r.Name, r.IDR, r.Requirements));
             Console.WriteLine(table.ToString());
         }
         private static void PrintTable2(List<BattleUnit> listOfValues, string head1, string head2, string head3)
@@ -92,17 +91,20 @@ namespace Battle_Planner_3000
             var table = new Table(head1, head2, head3);
             table.Config = TableConfiguration.UnicodeAlt();
             List<string> resources;
-            foreach (var Unit in listOfValues)
+            listOfValues.Select(u =>
             {
-                resources = new List<string>();
-                string allResources = "";
-                foreach (var resource in Unit.ResourcesInUnit)
-                {
-                    resources.Add($"{resource.Resource.Name} {resource.Count}"); 
-                }
-                allResources= string.Join("; ", resources);
-                table.AddRow(Unit.type, Unit.IDU, allResources);
-            }
+                var resources = u.ResourcesInUnit.Select(r => $"{r.Resource.Name} {r.Count}").ToList();
+                var allResources = string.Join("; ", resources);
+                return new { u.type, u.IDU, allResources };
+            }).ToList().ForEach(u => table.AddRow(u.type, u.IDU, u.allResources));
+            /* foreach (var Unit in listOfValues)
+             {
+                 resources = new List<string>();
+                 string allResources = "";
+                 Unit.ResourcesInUnit.Select(r => $"{r.Resource.Name} {r.Count}").ToList().ForEach(resources.Add);
+                 allResources = string.Join("; ", resources);
+                 table.AddRow(Unit.type, Unit.IDU, allResources);
+             }*/
             Console.WriteLine(table.ToString());
         }
         public static BattleUnit CreateNewBattleUnit()
@@ -121,9 +123,9 @@ namespace Battle_Planner_3000
                       return new BattleUnit(type);
                   }*/
                 resource = FindResource(id);
-                num=Int32.Parse(Input($"how much of{resource.Name}?"));
+                num = Int32.Parse(Input($"how much of{resource.Name}?"));
                 battleUnitsList.Add(new ResourceCount(resource, num));
-                answer= Input("IS IT ALL? (y/n)");
+                answer = Input("IS IT ALL? (y/n)");
             } while (answer.Equals("n"));
             return new BattleUnit(battleUnitsList, type);
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Text;
 using BetterConsoleTables;
@@ -95,7 +96,7 @@ namespace Battle_Planner_3000
                 string resources="";
                 foreach (var resource  in Unit.ResourcesInUnit)
                 {
-                    resources= string.Join("; ", resource.Name);
+                    resources= string.Join("; ", resource.Resource.Name);
                 }
                 table.AddRow(Unit.type, Unit.IDU, resources);
             }
@@ -110,7 +111,9 @@ namespace Battle_Planner_3000
                 return new BattleUnit(type);
             }
             var resource = FindResource(id);
-            return new BattleUnit(resource, type);
+            int num = Int32.Parse(Input($"how much of{resource.Name}?"));
+            var resourceCount = new ResourceCount(resource, num);
+            return new BattleUnit(resourceCount, type);
         }
         public static Resource FindResource(string id)
         {

@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Battle_Planner_3000.interfaces
 {
-    internal class BattleObjectInterface
+    public interface IBattleObject<T>
     {
-       
+        List<T> listOfThings { get; set; }
     }
 }

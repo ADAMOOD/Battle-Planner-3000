@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Battle_Planner_3000;
+
 
 namespace resourceEditor
 {
@@ -14,6 +16,7 @@ namespace resourceEditor
             Resource = resource;
             Count = count;
         }
+        Helpers
         public ResourceCount()
         {
 

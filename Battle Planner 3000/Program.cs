@@ -28,12 +28,31 @@ namespace Battle_Planner_3000
             BattleUnits = unitFile.loadSavedFile<BattleUnit>();
             while (true)
             {
-                var option = Input("l-list resources\nc-create new resource\ne-edit list of resources\nu-create unit");
+                var option = Input("l-list\nc-create new resource\ne-edit list of resources\nu-create unit\nu-create unit");
                 switch (option)
                 {
                     case "l":
                         {
-                            PrintTable(Resources, "name", "ID", "requirements");
+                            switch (Input("What do you wanna list\nResources-r\nUnits-u"))
+                            {
+                                case "r":
+                                {
+                                    PrintTable(Resources, "name", "ID", "requirements");
+                                        break;
+                                }
+                                case "u":
+                                {
+                                    PrintTable2(BattleUnits, "unit type", "UID", "Resources");
+                                        break;
+                                }
+                                default:
+                                {
+                                    PrintTable(Resources, "name", "ID", "requirements");
+                                    PrintTable2(BattleUnits, "unit type", "UID", "Resources");
+                                        break;
+                                }
+                            }
+                            
                             break;
                         }
                     case "c":
@@ -49,15 +68,15 @@ namespace Battle_Planner_3000
                             switch (Console.ReadLine())
                             {
                                 case "u":
-                                    {
-                                        resouce.addRequirements(GettingRequirements(resouce.Name));
-                                        break;
-                                    }
+                                {
+                                    resouce.addRequirements(GettingRequirements(resouce.Name));
+                                    break;
+                                }
                                 case "d":
-                                    {
-                                        Resources.RemoveAll(p => p.IDR == resouce.IDR);
-                                        break;
-                                    }
+                                {
+                                    Resources.RemoveAll(p => p.IDR == resouce.IDR);
+                                    break;
+                                }
                             }
                             break;
                         }
@@ -66,16 +85,30 @@ namespace Battle_Planner_3000
                             BattleUnits.Add(CreateNewBattleUnit());
                             break;
                         }
-                    case "lu":
-                        {
-                            PrintTable2(BattleUnits, "unit type", "UID", "Resources");
-                            break;
-                        }
                 }
                 resourcesfile.saveToFile(Resources);
                 unitFile.saveToFile(BattleUnits);
             }
         }
+
+       /* private static void EditBattleThing<t>(t resouce)
+        {
+            Console.WriteLine($"What do you wanna do with {resouce.Name}?\nd-delete it\nu-update its requirements");
+            switch (Console.ReadLine())
+            {
+                case "u":
+                {
+                    resouce.addRequirements(GettingRequirements(resouce.Name));
+                    break;
+                }
+                case "d":
+                {
+                    Resources.RemoveAll(p => p.IDR == resouce.IDR);
+                    break;
+                }
+            }
+        }*/
+
         private static void PrintTable(List<Resource> listOfValues, string head1, string head2, string head3)
         {
             var table = new Table(head1, head2, head3);
@@ -118,7 +151,7 @@ namespace Battle_Planner_3000
             do
             {
                 id = Input("give me resource id");
-                /*  if (id.Length == 0)
+                /*if (id.Length == 0)
                   {
                       return new BattleUnit(type);
                   }*/
@@ -167,4 +200,3 @@ namespace Battle_Planner_3000
         }
     }
 }
-

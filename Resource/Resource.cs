@@ -8,27 +8,26 @@ using Battle_Planner_3000.interfaces;
 
 namespace resourceEditor
 {
-    public class Resource : IBattleObject<string>
+    public class Resource: IBattleObject<string>
     {
-        public List<string> Requirements = new List<string>();
-        
+        public List<string> listOfThings { get; set; }
         public string Name { get; set; }
         public string IDR;
 
-        public Resource(string name,List<string> requirements)
+        public Resource(string name,List<string> listOfThings)
         {
-            Requirements = requirements;
+            this.listOfThings = listOfThings;
             Name = name;
             IDR = Helpers.randomInt(4);
         }
 
         public Resource()
         {
-
+            listOfThings = new List<string>();
         }
         public void addRequirements(List<string> resources)
         {
-            this.Requirements.AddRange(resources);
+            this.listOfThings.AddRange(resources);
         }
     }
 }

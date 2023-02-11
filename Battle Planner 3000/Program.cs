@@ -114,7 +114,7 @@ namespace Battle_Planner_3000
             var table = new Table(head1, head2, head3);
             table.Config = TableConfiguration.UnicodeAlt();
             listOfValues
-                .Select(resource => new { resource.Name, resource.IDR, Requirements = string.Join("; ", resource.Requirements) })
+                .Select(resource => new { resource.Name, resource.IDR, Requirements = string.Join("; ", resource.listOfThings) })
                 .ToList()
                 .ForEach(r => table.AddRow(r.Name, r.IDR, r.Requirements));
             Console.WriteLine(table.ToString());

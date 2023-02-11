@@ -16,7 +16,7 @@ namespace resourceEditor
             Resource = resource;
             Count = count;
         }
-        Helpers
+       
         public ResourceCount()
         {
 

@@ -8,5 +8,6 @@ namespace Battle_Planner_3000.interfaces
     public interface IBattleObject<T>
     {
         List<T> listOfThings { get; set; }
+        public void addThings(List<T> things);
     }
 }

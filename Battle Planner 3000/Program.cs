@@ -69,7 +69,7 @@ namespace Battle_Planner_3000
                             {
                                 case "u":
                                 {
-                                    resouce.addRequirements(GettingRequirements(resouce.Name));
+                                    resouce.addThings(GettingRequirements(resouce.Name));
                                     break;
                                 }
                                 case "d":
@@ -98,7 +98,7 @@ namespace Battle_Planner_3000
             {
                 case "u":
                 {
-                    resouce.addRequirements(GettingRequirements(resouce.Name));
+                    resouce.addThings(GettingRequirements(resouce.Name));
                     break;
                 }
                 case "d":

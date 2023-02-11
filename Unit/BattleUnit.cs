@@ -8,6 +8,7 @@ namespace UnitEditor
 {
     public class BattleUnit : IBattleObject<ResourceCount>
     {
+        
         public List<ResourceCount> listOfThings { get; set; }
         public string IDU;
         public string type;
@@ -33,7 +34,7 @@ namespace UnitEditor
             listOfThings=listOfResources;
             IDU = Helpers.randomInt(4);
         }
-        public void addResources(List<ResourceCount> resources)
+        public void addThings(List<ResourceCount> resources)
         {
             this.listOfThings.AddRange(resources);
         }

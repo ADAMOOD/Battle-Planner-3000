@@ -25,7 +25,7 @@ namespace resourceEditor
         {
             listOfThings = new List<string>();
         }
-        public void addRequirements(List<string> resources)
+        public void addThings(List<string> resources)
         {
             this.listOfThings.AddRange(resources);
         }

@@ -126,7 +126,7 @@ namespace Battle_Planner_3000
             List<string> resources;
             listOfValues.Select(u =>
             {
-                var resources = u.ResourcesInUnit.Select(r => $"{r.Resource.Name} {r.Count}").ToList();
+                var resources = u.listOfThings.Select(r => $"{r.Resource.Name} {r.Count}").ToList();
                 var allResources = string.Join("; ", resources);
                 return new { u.type, u.IDU, allResources };
             }).ToList().ForEach(u => table.AddRow(u.type, u.IDU, u.allResources));
@@ -134,7 +134,7 @@ namespace Battle_Planner_3000
              {
                  resources = new List<string>();
                  string allResources = "";
-                 Unit.ResourcesInUnit.Select(r => $"{r.Resource.Name} {r.Count}").ToList().ForEach(resources.Add);
+                 Unit.listOfThings.Select(r => $"{r.Resource.Name} {r.Count}").ToList().ForEach(resources.Add);
                  allResources = string.Join("; ", resources);
                  table.AddRow(Unit.type, Unit.IDU, allResources);
              }*/

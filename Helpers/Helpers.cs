@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+using Battle_Planner_3000.interfaces;
 
 namespace Battle_Planner_3000
 {
@@ -19,6 +21,10 @@ namespace Battle_Planner_3000
             } while (IDS.Contains(idr));
             IDS.Add(idr);
             return idr;
+        }
+        public void DeleteBattleObject<T>(IBattleObject<T> BattleObject,List<T> BattleList)
+        {
+           // BattleList.Remove(X => X == BattleObject);
         }
 
     }
